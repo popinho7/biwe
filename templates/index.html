@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+</head>
+<body>
+
+<h1>Menu</h1>
+<ul>
+{% for teams in teamsDatabase %}
+    <li><a href="/team/{{ teams }}">{{ teams }}</a></li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

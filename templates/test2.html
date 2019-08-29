@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#formationTable').DataTable({
+                paging: false,
+                searching: false,
+                "bInfo" : false,
+                "order": [[ 1, "desc" ]],
+
+                'rowCallback': function(row, data, index){
+                if(data[1] == 'Portero'){
+                    $(row).find('td:eq(1)').css('background-color', 'black');
+                    $(row).find('td:eq(1)').css('color', 'white');
+                }
+                if(data[1] == 'Defensa'){
+                    $(row).find('td:eq(1)').css('background-color', 'blue');
+                    $(row).find('td:eq(1)').css('color', 'white');
+                }
+                if(data[1] == 'Mediocentro'){
+                    $(row).find('td:eq(1)').css('background-color', 'green');
+                    $(row).find('td:eq(1)').css('color', 'white');
+                }
+                if(data[1] == 'Delantero'){
+                    $(row).find('td:eq(1)').css('background-color', 'red');
+                    $(row).find('td:eq(1)').css('color', 'white');
+                }
+            }
+            });
+
+            $('#buyTable').DataTable({
+                paging: false,
+                searching: false,
+                "bInfo" : false
+            });
+
+            $('#sellTable').DataTable({
+                paging: false,
+                searching: false,
+                "bInfo" : false
+            });
+
+        } );
+    </script>
+    
+</head>
+
+<body>
+    <h1>Menu</h1>
+    
+    <ul>
+        {% for teams in teamsDatabase %}
+            <li><a href="/team/{{ teams }}">{{ teams }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h1>Team {{name}}</h1>
+
+    <div id="blocks">
+        <div id="block2">
+            <table id="formationTable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="5" style="text-align:center">FORMATION</th>
+                    </tr>
+                    <tr>
+                        <th>Name</th> 
+                        <th>Position</th>
+                        <th>Points</th>
+                        <th>Games</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for team in leagueFormations if team.teamName == name %}
+                    {% for player in team.players %}
+                        <tr>
+                            <td>{{ player.name }}</td>
+                            <td>{{ player.position }}</td>
+                            <td>{{ player.points }}</td>
+                            <td>{{ player.games }}</td>
+                            <td>{{ player.price }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="block1">
+            <table id="sellTable" class="table table-striped table-bordered">
+                <tr>
+                    <th colspan="3" style="text-align:center">SELL</th>
+                </tr>
+                <tr>
+                    <th>To</th> 
+                    <th>Player</th>
+                    <th>Amount</th>
+                </tr>
+                {% for operation in marketMovements if operation.from == name %}
+                    <tr>
+                            <td>{{ operation.to }}</td>
+                            <td>{{ operation.playername }}</td>
+                            <td>{{ operation.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div id="block3">
+            <table id="buyTable" class="table table-striped table-bordered">
+                <tr>
+                    <th colspan="3" style="text-align:center">BUY</th>
+                </tr>
+                <tr>
+                    <th style="text-align:center">From</th> 
+                    <th style="text-align:center">Player</th>
+                    <th style="text-align:center">Amount</th>
+                </tr>
+                {% for operation in marketMovements if operation.to == name %}
+                    <tr>
+                        <td style="text-align:center">{{ operation.from }}</td>
+                        <td style="text-align:center">{{ operation.playername }}</td>
+                        <td style="text-align:center">{{ operation.amount }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+</body>
+</html>

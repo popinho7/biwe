@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>Flask app</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Team {{name}}</h1>
+    <div style="width: 20%; height: 20%">
+        <table class="customTable">
+            {% for key, value in table.items() %}
+            <tr>
+                <th>{{ key }}</th>
+                <td>{{ value }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

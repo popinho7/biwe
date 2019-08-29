@@ -1,0 +1,92 @@
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: lighter;
+    color: blue;
+}
+
+table.customTable {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #7ea8f8;
+    border-style: solid;
+    color: #000000;
+}
+
+table.customTable td,
+table.customTable th {
+    font-family: 'Roboto', sans-serif;
+    border-width: 2px;
+    border-color: #7ea8f8;
+    border-style: solid;
+    padding: 5px;
+}
+
+table.customTable thead {
+    background-color: #7ea8f8;
+}
+
+#blocks {
+    width:80%;
+    height:100%;
+    margin:auto
+}
+
+#block2 {
+    width:100%;
+    float: center;
+}
+
+#block3 {
+    height:100%;
+    width:35%;
+    float: left;
+    margin-left: 200
+}
+
+#block1 {
+    height:100%;
+    width:35%;
+    float: right;
+    margin-right: 200
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  li {
+    float: left;
+    border-right:1px solid #bbb;
+  }
+  
+  li:last-child {
+    border-right: none;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+  }
